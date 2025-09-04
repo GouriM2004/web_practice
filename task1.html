@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Layout: make footer stick to bottom */
+    html, body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1; /* push footer to bottom */
+    }
+
+    /* Navigation */
+    header {
+      background: #333;
+      color: white;
+      padding: 10px 20px;
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: auto;
+    }
+    nav .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      padding: 5px 10px;
+      transition: 0.3s;
+    }
+    nav ul li a.active,
+    nav ul li a:hover {
+      background: #ff6600;
+      border-radius: 5px;
+    }
+
+    /* Section Styles */
+    section {
+      display: none;
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+    }
+    section.active {
+      display: block;
+    }
+
+    .hero {
+      background: #f4f4f4;
+      padding: 80px 20px;
+    }
+    .hero h2 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      color: #333;
+    }
+    .hero p {
+      font-size: 1.2em;
+      color: #666;
+    }
+
+    .content img {
+      max-width: 100%;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    /* Contact Form */
+    form {
+      max-width: 400px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    form input, form textarea {
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      background: #ff6600;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: 0.3s;
+    }
+    form button:hover {
+      background: #e65c00;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        margin-top: 10px;
+      }
+      nav ul li {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <h1 class="logo">MyWebsite</h1>
+      <ul>
+        <li><a href="#" class="nav-link active" data-target="home">Home</a></li>
+        <li><a href="#" class="nav-link" data-target="about">About</a></li>
+        <li><a href="#" class="nav-link" data-target="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="hero active">
+      <h2>Welcome to My Website</h2>
+      <p>This is a simple static website created with HTML and CSS.</p>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content">
+      <h2>About Us</h2>
+      <p>This is the about page. Here you can write about yourself or your business.</p>
+      <img src="codvedatech.jpeg" alt="About Image">
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Tabs -->
+  <script>
+    const links = document.querySelectorAll(".nav-link");
+    const sections = document.querySelectorAll("section");
+
+    links.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+
+        // Remove active classes
+        links.forEach(l => l.classList.remove("active"));
+        sections.forEach(s => s.classList.remove("active"));
+
+        // Add active to clicked link + section
+        link.classList.add("active");
+        document.getElementById(link.dataset.target).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
