@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Webpage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f9fafb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #161d31;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+
+    .btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+      align-items: center;
+    }
+
+    .btn:hover {
+      background: #1e40af;
+    }
+
+    select {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 15px;
+      margin-top: 0.5rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 400px;
+      text-align: center;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+    }
+
+    .error {
+      color: #dc2626;
+      font-size: 0.9rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>🌐 Interactive Webpage</header>
+
+  <div class="container">
+    <!-- Dropdown -->
+    <section>
+      <h2>Dropdown Menu</h2>
+      <select id="dropdown">
+        <option value="">-- Select an option --</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="javascript">JavaScript</option>
+      </select>
+    </section>
+
+    <!-- Modal -->
+    <section style="margin-top: 2rem;">
+      <h2>Modal Popup</h2>
+      <button class="btn" id="openModal">Open Modal</button>
+      <div class="modal" id="myModal">
+        <div class="modal-content">
+          <p>This is a professional modal popup ✨</p>
+          <button class="btn" id="closeModal">Close</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form -->
+    <section style="margin-top: 2rem;">
+      <h2>Contact Form</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="email" id="email" placeholder="Your Email">
+        <textarea id="message" placeholder="Your Message"></textarea>
+        <p class="error" id="formError"></p>
+        <button type="submit" class="btn">Submit</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Modal
+    const modal = document.getElementById("myModal");
+    const openModal = document.getElementById("openModal");
+    const closeModal = document.getElementById("closeModal");
+
+    openModal.addEventListener("click", () => modal.style.display = "flex");
+    closeModal.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+
+    // Form validation
+    const form = document.getElementById("contactForm");
+    const errorMsg = document.getElementById("formError");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        errorMsg.textContent = "⚠️ Please fill in all fields.";
+      } else if (!/\S+@\S+\.\S+/.test(email)) {
+        errorMsg.textContent = "⚠️ Please enter a valid email.";
+      } else {
+        errorMsg.textContent = "";
+        alert("✅ Form submitted successfully!");
+        form.reset();
+      }
+    });
+  </script>
+
+</body>
+</html>
